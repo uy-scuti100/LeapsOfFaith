@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Actor&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Exo 2", sans-serif;
+}
+
+::selection {
+  color: white;
+  background: black;
+}
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Webkit based browsers (Chrome, Safari, etc.) */
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body,
+html,
+:root {
+  height: 100%;
+}
+
+.accordion {
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  max-height: 0px;
+  overflow: hidden;
+}
+.accordion.show {
+  height: auto;
+  max-height: 9999px;
+  transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+}
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 40px;
+  border: none;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Apply borders to the table header (th) and table data (td) cells */
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Optionally, you can add some styling to the header cells */
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Optional: Add some spacing between the tables */
+table + table {
+  margin-top: 20px;
+}
+@layer base {
+  body {
+    @apply font-primary bg-white text-primary;
+  }
+  .h2 {
+    @apply text-3xl capitalize;
+  }
+  .grad {
+    @apply bg-gradient-to-t from-[#ffffff]  to-red-100/40;
+  }
+  .btn {
+    @apply h-[50px] flex justify-center items-center rounded-[8px] px-10 py-[10px] text-sm uppercase font-bold;
+  }
+  .btn-accent {
+    @apply bg-accent text-primary hover:bg-accent-hover transition-all;
+  }
+  .input {
+    @apply h-[50px] rounded-[8px] w-full outline-none px-6 text-primary border-black border;
+  }
+  .cart {
+    -webkit-transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}

@@ -27,9 +27,11 @@ const CategoryNavMobile = ({ setCatNavMobile }) => {
       </div>
 
       <div className="my-10 flex items-center justify-center border-b pb-3">
-        <div>
-          <img src={Logo} alt="logo" className="w-[100px]" />
-        </div>
+        <a href="/">
+          <div>
+            <img src={Logo} alt="logo" className="w-[100px]" />
+          </div>
+        </a>
       </div>
 
       <div className="flex flex-col gap-y-8">

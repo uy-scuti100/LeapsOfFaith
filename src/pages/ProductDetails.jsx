@@ -2,7 +2,6 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useContext, useState } from "react";
-
 // context
 import { CartContext } from "../context/CartContext";
 
@@ -16,20 +15,36 @@ import ColorBox from "../components/ColorBox";
 import SizeBox from "../components/SizeBox";
 
 const ProductDetails = () => {
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [openAccordion, setOpenAccordion] = useState(null);
   const { addToCart } = useContext(CartContext);
   const { id } = useParams();
-  // console.log(id);
   const { data } = useFetch(`/products?populate=*&filters[id][$eq]=${id}`);
-  // console.log(data);
   const imageUrl = import.meta.env.VITE_REACT_APP_IMAGE_URL;
 
-  // Keep track of open accordion state
-  const [openAccordion, setOpenAccordion] = useState(null);
+  const handleColorSelection = (colorValue) => {
+    setSelectedColor(colorValue);
+  };
+
+  // Function to handle size selection
+  const handleSizeSelection = (sizeName) => {
+    setSelectedSize(sizeName);
+  };
 
   // Function to handle toggling of accordions
   const handleAccordionToggle = (header) => {
     setOpenAccordion((prev) => (prev === header ? null : header));
   };
+
+  const handleAddToCart = () => {
+    if (!selectedColor || !selectedSize) {
+      return;
+    } else {
+      addToCart(data, id, selectedColor, selectedSize);
+    }
+  };
+
   if (!data) {
     return (
       <div className="grid place-items-center">
@@ -68,7 +83,7 @@ const ProductDetails = () => {
             <p className="mb-12">{data[0].attributes.description}</p>
 
             {/* sizes and color */}
-            <div className="pb-20">
+            <div className="pb-10">
               <div className="pb-4">
                 <h3 className="text-xl font-semibold mb-2">Available Colors</h3>
                 <div className="flex gap-x-6">
@@ -76,6 +91,10 @@ const ProductDetails = () => {
                     <ColorBox
                       key={color.id}
                       colorValue={color.attributes.value}
+                      onClick={() =>
+                        handleColorSelection(color.attributes.value)
+                      }
+                      isSelected={selectedColor === color.attributes.value}
                     />
                   ))}
                 </div>
@@ -84,24 +103,39 @@ const ProductDetails = () => {
                 <h3 className="text-xl font-semibold mb-2">Available Sizes</h3>
                 <div className="flex gap-x-6">
                   {data[0].attributes.sizes.data.map((size) => (
-                    <SizeBox key={size.id} sizeName={size.attributes.name} />
+                    <SizeBox
+                      key={size.id}
+                      sizeName={size.attributes.name}
+                      onClick={() => handleSizeSelection(size.attributes.name)}
+                      isSelected={selectedSize === size.attributes.name}
+                    />
                   ))}
                 </div>
               </div>
+            </div>
+
+            <div className="border text-accent-hover border-slate-950 rounded-3xl p-2 lg:p-3 text-lg md:w-3/4 mb-10">
+              Please Tick a Color and a Size !!
             </div>
             <div className="flex items-center gap-x-6">
               <div className="text-3xl text-accent font-semibold basis-1/2">
                 $ {data[0].attributes.Price}
               </div>
               <button
-                onClick={() => addToCart(data[0], id ?? "")}
-                className="btn btn-accent text-white basis-1/2"
+                onClick={handleAddToCart}
+                disabled={!selectedColor || !selectedSize} // Disable button if color or size is not selected
+                className="btn btn-accent text-white basis-1/2 cursor-pointer"
               >
                 Add to cart
               </button>
             </div>
           </div>
         </div>
+
+        {/*  */}
+        {/*  */}
+        {/*  */}
+
         {/* miore information */}
         <div className="mb-10">
           <div className="pb-4">

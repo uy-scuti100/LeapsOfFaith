@@ -10,6 +10,7 @@ export const sliderData = [
     title2: "On your",
     title3: "first purchase",
     btnText: "Shop now",
+    link: "/products/3",
   },
   {
     img: ShoeImg2,
@@ -18,6 +19,7 @@ export const sliderData = [
     title2: "On your",
     title3: "first purchase",
     btnText: "Shop now",
+    link: "/product/26",
   },
   {
     img: ShoeImg3,
@@ -26,5 +28,6 @@ export const sliderData = [
     title2: "On your",
     title3: "first purchase",
     btnText: "Shop now",
+    link: "/product/25",
   },
 ];

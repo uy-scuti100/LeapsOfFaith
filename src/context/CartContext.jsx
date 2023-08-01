@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext(null);
 
@@ -22,7 +22,7 @@ const CartProvider = ({ children }) => {
   // cart amount
   useEffect(() => {
     const amount = cart.reduce((a, b) => {
-      return a + (b.amount ?? 0);
+      return a + b.amount;
     }, 0);
     setItemsAmount(amount);
   }, [cart]);
@@ -30,31 +30,40 @@ const CartProvider = ({ children }) => {
   // cart total
   useEffect(() => {
     const total = cart.reduce((a, c) => {
-      return a + c.attributes.Price * (c.amount ?? 0);
+      return a + c.attributes.Price * c.amount;
     }, 0);
     setTotal(total);
   }, [cart]);
 
-  // add to cart
-  const addToCart = (item, id) => {
+  /// add to cart
+  const addToCart = (item, id, color, size) => {
     const itemId = parseInt(id);
-    const newItem = { ...item[0], amount: 1 }; // Removed [0], as item is already of type Product
-    setCart([...cart, newItem]);
-    // check if product is already in cart
-    const existingCartItemIndex = cart.findIndex(
-      (cartItem) => cartItem.id === itemId
+    const newItem = {
+      ...item[0],
+      amount: 1,
+      selectedSize: size,
+      selectedColor: color,
+    };
+    const existingCartItem = cart.find(
+      (cartItem) =>
+        cartItem.id === itemId &&
+        cartItem.color === color &&
+        cartItem.size === size
     );
 
-    if (existingCartItemIndex !== -1) {
-      const updatedCart = [...cart];
-      const existingCartItem = updatedCart[existingCartItemIndex];
-
-      // Check if existingCartItem and its amount property are defined
-      if (existingCartItem && existingCartItem.amount !== undefined) {
-        existingCartItem.amount += 1;
-        setCart(updatedCart);
-      }
+    if (existingCartItem) {
+      // If the same item with the same color and size is already in the cart, increase the amount
+      const newCart = cart.map((item) => {
+        if (item.id === itemId && item.color === color && item.size === size) {
+          return { ...item, amount: item.amount + 1 };
+        } else {
+          return item;
+        }
+      });
+      setCart(newCart);
     } else {
+      // If the item with the selected color and size is not in the cart, add it as a new item
+      const newItem = { ...item[0], amount: 1, color, size };
       setCart([...cart, newItem]);
     }
 

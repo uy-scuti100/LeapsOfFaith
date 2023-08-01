@@ -5,25 +5,12 @@ import Qty from "./Qty";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, color, size }) => {
+  // console.log(color)
+  // console.log(size)
   const { removeFromCart } = useContext(CartContext);
   const imageUrl = import.meta.env.VITE_REACT_APP_IMAGE_URL;
-
-  // Ensure the 'item' and its nested properties exist
-  if (
-    !item ||
-    !item.attributes ||
-    !item.attributes.image ||
-    !item.attributes.image[0] ||
-    !item.attributes.image[0].data ||
-    !item.attributes.image[0].data[0] ||
-    !item.attributes.image[0].data[0].attributes ||
-    !item.attributes.image[0].data[0].attributes.url
-  ) {
-    return null;
-  }
-
-  const img = item.attributes.image[0].data[0].attributes.url;
+  const img = item.attributes.image.data[0].attributes.url;
 
   return (
     <div className="flex gap-x-8">
@@ -45,13 +32,22 @@ const CartItem = ({ item }) => {
             <Qty item={item} />
           </div>
           <div className="text-accent text-xl">
-            $ {item.attributes.Price * (item.amount ?? 0)}
+            $ {item.attributes.Price * item.amount}
           </div>
         </div>
         <div>
           <span className="text-accent text-xl">
             $ {item.attributes.Price} per pair
           </span>
+        </div>
+        <div>
+          <div className="flex gap-x-4 items-center mt-4">
+            <div
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: color }}
+            ></div>
+            |<div>{size}</div>
+          </div>
         </div>
       </div>
     </div>

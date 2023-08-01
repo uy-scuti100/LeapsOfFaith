@@ -28,7 +28,7 @@ const Hero = () => {
                 <div className="text-[20px] uppercase font-medium leading-tight mb-4">
                   Save 28% on all Monk strap shoes
                 </div>
-                <a href="#" className="uppercase text-accent">
+                <a href="/search?query=monk" className="uppercase text-accent">
                   Shop now
                 </a>
               </div>
@@ -45,7 +45,7 @@ const Hero = () => {
                 <div className="text-[20px] uppercase font-medium leading-tight mb-4">
                   Save 40% on all Boots
                 </div>
-                <a href="#" className="uppercase text-accent">
+                <a href="/search?query=boot" className="uppercase text-accent">
                   Shop now
                 </a>
               </div>

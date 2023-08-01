@@ -6,7 +6,7 @@ const Qty = ({ item }) => {
   // console.log(item);
   return (
     <div className="flex gap-x-6 items-center text-primary">
-      {item.amount !== undefined && item.amount < 10 ? (
+      {item.amount && item.amount < 10 ? (
         <select
           onChange={(e) => handleSelect(e, item.id)}
           value={item.amount}

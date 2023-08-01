@@ -20,7 +20,7 @@ const MainSlider = () => {
     >
       <>
         {sliderData.map((data, i) => {
-          const { pretitle, title1, title2, title3, img, btnText } = data;
+          const { pretitle, title1, title2, title3, img, btnText, link } = data;
           return (
             <SwiperSlide key={i}>
               <div className="flex flex-col lg:flex-row h-full p-[20px] md:p-[60px]">
@@ -34,9 +34,12 @@ const MainSlider = () => {
                     {title2} <br />
                     {title3}
                   </div>
-                  <button className="btn btn-accent text-white mx-auto lg:mx-0">
+                  <a
+                    href={link}
+                    className="btn btn-accent text-white mx-auto lg:mx-0"
+                  >
                     {btnText}
-                  </button>
+                  </a>
                 </div>
                 {/* img */}
                 <div className="flex-1">

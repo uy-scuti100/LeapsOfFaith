@@ -4,7 +4,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const SearchResult = ({ product }) => {
   const imageUrl = import.meta.env.VITE_REACT_APP_IMAGE_URL;
-  const [imageLoaded, setImageLoaded] = useState < boolean > true;
+  const [imageLoaded, setImageLoaded] = useState(true);
 
   if (
     !product ||

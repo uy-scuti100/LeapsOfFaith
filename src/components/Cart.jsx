@@ -25,24 +25,26 @@ const Cart = () => {
 
   return (
     <div className="w-full h-full px-4 text-primary">
-      <div className="overflow-y-auto overflow-x-hidden h-[65vh]">
-        <div className="flex justify-between items-center h-[98px]">
-          <div className="text-xl uppercase">Basket</div>
-          <div className="text-4xl w-20 cursor-pointer" onClick={toggleNav}>
-            <IoClose />
-          </div>
+      <div className="flex justify-between items-center pb-10">
+        <div className="text-xl uppercase mt-5">Basket</div>
+        <div className="text-4xl cursor-pointer mt-5" onClick={toggleNav}>
+          <IoClose />
         </div>
+      </div>
+      <div className="overflow-y-auto overflow-x-hidden h-[50vh]">
         <div className="flex flex-col gap-y-10 px-2 h-full bg-white">
           {cart.length >= 1 ? (
             <div>
-              {cart.map((item) => {
-                // Check if the 'item' is not undefined and has the 'id' property
-                if (item) {
-                  return <CartItem item={item} key={item.id} />;
-                } else {
-                  return null;
-                }
-              })}{" "}
+              {cart.map((item, color, size) => {
+                return (
+                  <CartItem
+                    item={item}
+                    key={item.id}
+                    color={item.color}
+                    size={item.size}
+                  />
+                );
+              })}
             </div>
           ) : (
             <div className="flex flex-col justify-center gap-y-5 items-center h-full w-full">

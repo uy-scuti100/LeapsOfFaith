@@ -47,7 +47,7 @@ const CategoryNav = () => {
                         <img
                           src={`${imageUrl}${image.data.attributes.url}`}
                           alt="category image"
-                          className="w-[50px] h-[50px] rounded-full"
+                          className="w-[50px] h-[50px] rounded-full object-cover"
                           loading="lazy"
                         />
                       )}

@@ -15,7 +15,7 @@ const Products = () => {
   // console.log(productListData);
 
   const { data: catInfo } = useFetch(`/categories/${id}?populate=*`);
-  console.log(catInfo);
+  // console.log(catInfo);
   const imageUrl = import.meta.env.VITE_REACT_APP_IMAGE_URL;
 
   const [title, setTitle] = useState(null);
@@ -69,7 +69,7 @@ const Products = () => {
           <div className="py-3 absolute inset-0 flex items-center justify-center text-[60px] uppercase text-center lg:text-left text-white z-30">
             {title}
           </div>
-          <div className="absolute bg-black/50 inset-0"></div>
+          <div className="absolute bg-black/30 inset-0"></div>
         </div>
         <div className="lg:flex gap-x-[30px]">
           <CategoryNav />

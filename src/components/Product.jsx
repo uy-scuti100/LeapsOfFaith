@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { TailSpin } from "react-loader-spinner"; // Replace 'react-loading-icons' with the correct package name you are using for TailSpin
+import { TailSpin } from "react-loader-spinner";
 
 const Product = ({ product }) => {
   const imageUrl = import.meta.env.VITE_REACT_APP_IMAGE_URL;
@@ -45,7 +45,10 @@ const Product = ({ product }) => {
         <div className="px-6 pb-8 flex flex-col">
           {/* category title */}
           <div className="text-sm text-accent capitalize mb-2">
-            {product.attributes.categories.data[0].attributes.name.slice(0, -1)}
+            {product.attributes.categories.data[0]?.attributes.name.slice(
+              0,
+              -1
+            )}
           </div>
 
           {/* product title */}
